@@ -47,6 +47,3 @@ Dự án này phát triển một website thương mại điện tử cho The Co
 
 ## Đóng góp
 Mọi đóng góp để cải thiện dự án đều được hoan nghênh! Hãy tạo pull request hoặc mở issue để thảo luận.
-
-## Giấy phép
-Dự án này được phát hành dưới giấy phép MIT.
