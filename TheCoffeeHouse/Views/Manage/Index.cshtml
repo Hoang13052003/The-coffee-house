@@ -1,0 +1,105 @@
+﻿@model TheCoffeeHouse.Models.IndexViewModel
+@{
+    ViewBag.Title = "Hồ sơ cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-avatar">
+            <h2>@User.Identity.Name</h2>
+        </div>
+
+        <div class="profile-body">
+            <h4>Cài đặt tài khoản</h4>
+            <hr />
+            <div class="profile-info">
+                <div class="info-item">
+                    <span class="info-label">Mật khẩu:</span>
+                    <span class="info-value">
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Thay đổi mật khẩu", "ChangePassword", null, new { @class = "btn btn-sm btn-primary" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Tạo mật khẩu", "SetPassword", null, new { @class = "btn btn-sm btn-success" })
+                        }
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Lịch sử đơn hàng:</span>
+                    <span class="info-value">
+                        <a href="/LichSuDonHang" class="btn btn-sm btn-primary">Lịch sử</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Styles {
+    <style>
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .profile-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin-bottom: 10px;
+        }
+
+        .profile-email {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .profile-body {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .profile-info {
+            margin-top: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    </style>
+}

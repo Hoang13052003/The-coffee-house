@@ -1,0 +1,69 @@
+﻿@model TheCoffeeHouse.Models.EtityFarmwork.Post
+@using TheCoffeeHouse.Models.EtityFarmwork
+@{
+    ViewBag.Title = "PostDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <img src="~/Content/Clients/assets/img-post/@Html.DisplayFor(model=>model.Image)" class="w-100 img-fluid" style="height:600px;" alt="" />
+</div>
+<div class="container" style="width:50%;">
+    <div class="row">
+        <ul style="display: flex; margin-top: 30px; margin-bottom: 20px;">
+            <li style="margin-right: 10px;">Blog </li>
+            <li style="margin-right: 10px;"> | </li>
+            <li>@Html.DisplayFor(model=>model.PostCategory.Name)</li>
+        </ul>
+        <h2>@Html.DisplayFor(model=>model.Name)</h2>
+    </div>
+    <div class="row" style="margin-bottom: 30px;">
+        <p>@Html.DisplayFor(model => model.SeoTitle)</p>
+        @{
+            string description = Html.DisplayFor(model => model.Description).ToString();
+            if (!string.IsNullOrEmpty(description))
+            {
+                // Sử dụng phương thức split trên chuỗi C#
+                string[] descriptionParts = description.Split(new string[] { "//" }, StringSplitOptions.None);
+
+                // Hiển thị các phần của chuỗi
+                for (int i = 0; i < descriptionParts.Length; i++)
+                {
+                    if (descriptionParts.Count() > 1 && i == 0)
+                    {
+                        <p style="color: #E57905;">@Html.Raw(descriptionParts[i])</p>
+                    }
+                    else
+                    {
+                        <p>@Html.Raw(descriptionParts[i])</p>
+                    }
+                }
+            }
+        }
+        @{
+            foreach (PostDetail item in ViewBag.Detail)
+            {
+                <img src="~/Content/Clients/assets/img-post/@item.Image" class="w-100 img-fluid" style="" alt="" />
+                <p class="text-center fst-italic">@item.Name</p>
+                <p style="color: #E57905;">@item.SeoTitle </p>
+                string descriptionDetail = item.Description;
+                if (!string.IsNullOrEmpty(descriptionDetail))
+                {
+                    // Sử dụng phương thức split trên chuỗi C#
+                    string[] descriptiondetail = descriptionDetail.Split(new string[] { "//" }, StringSplitOptions.None);
+
+                    // Hiển thị các phần của chuỗi
+                    for (int i = 0; i < descriptiondetail.Length; i++)
+                    {
+                        <p style="margin-bottom: 30px;">@Html.Raw(descriptiondetail[i])</p>
+                    }
+                }
+            }
+        }
+        <div class="d-flex justify-content-between" style="margin-bottom: 30px;">
+            <button type="button" class="btn btn-secondary" style="width: 20%;">Bài trước</button>
+            <button type="button" class="btn btn-secondary" style="width: 20%;">Bài kế tiếp</button>
+        </div>
+        <hr style="color: black; border: 1px solid black;"/>
+    </div>
+
+</div>

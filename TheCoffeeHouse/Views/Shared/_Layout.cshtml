@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta http-equiv="X-UA-Compatible" content="IE=edge">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/456dcd6aaf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="~/Content/Clients/assets/css/index.css">
+    <link rel="stylesheet" href="~/Content/Clients/assets/css/AtHome.css">
+    <link rel="stylesheet" href="~/Content/Clients/assets/css/menu.css">
+    <link href="~/Content/Clients/assets/css/giohang.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Clients/assets/css/sanpham.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/Clients/assets/css/DN-DK.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Clients/assets/css/responesive.css">
+    <title>Trang chủ</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        * {
+            font-family: Roboto;
+        }
+
+        #registerLink:hover, #loginLink:hover {
+            color: #E57905;
+        }
+
+        .count-cart {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 6px;
+            left: 26px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fe4c50;
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+    </style>
+    @RenderSection("Styles", required: false)
+
+</head>
+<body>
+    <!-- Nav bar -->
+    <nav id="nav_bar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
+        <div class="container">
+            <div class="collapse navbar-collapse d-sm-inline-flex">
+                <ul class="navbar-nav flex-grow-1 justify-content-center">
+                    <li>
+                        <img src="~/Content/Clients/assets/img/navbar/icon_vitri.jpg" alt="">
+                        <span>154 Cửa hàng khắp cả nước</span>
+                    </li>
+                    <li class="mx-5">
+                        <img src="~/Content/Clients/assets/img/navbar/phone.jpg" alt="">
+                        <span>Đặt hàng: 1800.6936</span>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <!-- Container - nav -->
+    <div id="container" style="border-bottom: 0.5px solid #d7d9d7;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-12">
+                    <a class="link-logo" href="@Url.Action("Index", "Home")">
+                        <div class="header_logo">
+                            <img src="~/Content/Clients/assets/img/container/logo.png" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-9">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a class="menu-link" href="@Url.Action("Coffee", "AtHome")">Cà phê</a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="@Url.Action("Tea", "AtHome")">Trà</a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="@Url.Action("Index", "Menu")">Menu <i class="fa-solid fa-caret-down"></i></a>
+                            <div class="menu-child">
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 1 })">Tất cả</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 2 })">Cà Phê</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 2 })">Cà Phê Việt Nam</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 2 })">Cà Phê Máy</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 2 })">Cold Brew</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 3 })">Trà</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 3 })">Trà trái cây</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 3 })">Trà sữa Macchiato</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 4 })">Cloud</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 4 })">CloudTea</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 4 })">CloudFee</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 5 })">Hi-Tea Healthy</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 5 })">Hi-Tea Trà</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 5 })">Hi-Tea Đá Tuyết</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 6 })">Trà Xanh - Sô co la</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 6 })">Trà xanh tây bắc</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 6 })">Sô cô la</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 7})">Thức uống đá xay</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 7 })">Đá xay Frosty</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 8 })">Bánh & Snack</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 8 })">Bánh mặn</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 8 })">Bánh ngọt</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 8 })">Snack</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="@Url.Action("ProductByCategory","Menu", new { id = 9 })">Tại nhà</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 9 })">Cà phê tại nhà</a></li>
+                                        <li><a href="@Url.Action("ProductByCategory","Menu", new { id = 9 })">Trà tại nhà</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#">Chuyện Nhà <i class="fa-solid fa-caret-down"></i></a>
+                            <div class="menu-child">
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="#">Coffeeholic</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="#">#Chuyencaphe</a></li>
+                                        <li><a href="#">#Phacaphe</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="">Teaholic</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="">#Phatra</a></li>
+                                        <li><a href="">#Cauchuyenvetra</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-child-item">
+                                    <ul class="label-menu">
+                                        <li>
+                                            <a href="">Blog</a>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-child-list">
+                                        <li><a href="">#Inthemood</a></li>
+                                        <li><a href="">#Review</a></li>
+                                        <li><a href="">#HumanofTCH</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="menu-item"><a class="menu-link" href="">Cảm hứng CloudFee</a></li>
+                        <li class="menu-item"><a class="menu-link" href="">Cửa hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="list-menu">
+            <label for="bar">
+                <i class="fas fa-bars"></i>
+            </label>
+            <input type="checkbox" name="" id="bar">
+            <div class="header-menu-mini">
+                <ul>
+                    <li><a href="@Url.Action("Coffee", "AtHome")">Cà phê</a></li>
+                    <li><a href="@Url.Action("Tea", "AtHome")">Trà</a></li>
+                    <li><a href="@Url.Action("Index", "Menu")">Menu</a></li>
+                    <li><a href="">Chuyện Nhà</a></li>
+                    <li><a href="">Cảm hứng CloudFee</a></li>
+                    <li><a href="">Cửa hàng</a></li>
+                    <li><a href="">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</a> </li>
+                    <li><a href="">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="nav_link">
+            <a href="/GioHang">
+                <i class="fas fa-shopping-cart shop" style="color: #E57905; margin-right: 10px;"></i>
+                <span id="count-cart" class="count-cart">0</span>
+            </a>
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h3>Giới thiệu</h3>
+                    <ul>
+                        <li><a>Về Chúng Tôi</a></li>
+                        <li><a>Sản phẩm</a></li>
+                        <li><a>Khuyến mãi</a></li>
+                        <li><a>Chuyện cà phê</a></li>
+                        <li><a>Cửa Hàng</a></li>
+                        <li><a>Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h3>Điều khoản</h3>
+                    <ul>
+                        <li><a>Điều khoản sử dụng</a></li>
+                        <li><a>Chính sách bảo mật thông tin</a></li>
+                        <li><a>Hướng dẫn xuất hóa đơn GTGT</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <p>
+                        <img src="~/Content/Clients/assets/img/footer/footer_phone.webp" alt="">Đặt hàng: 1800 6936
+                    </p>
+                    <p>
+                        <img src="~/Content/Clients/assets/img/footer/footer_vitri.webp" alt="">Liên hệ
+                    </p>
+                    <p>
+                        Tầng 3-4 Hub Building 195/10E Điện Biên Phủ, P.15 , Q.Bình Thạnh, TP.Hồ Chí Minh
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="info">
+                        <a href="">
+                            <img class="logo" src="~/Content/Clients/assets/img/footer/logo.jpg" alt="">
+                            <img class="img" src="~/Content/Clients/assets/img/footer/pannel-footer.jpg" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img class="icon" src="~/Content/Clients/assets/img/footer/icon-ig.svg" alt="">
+                        </a>
+                        <a href="https://www.facebook.com/The.Coffee.House.2014/">
+                            <img class="icon" src="~/Content/Clients/assets/img/footer/icon-facebook.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="info-text">
+                        <p>Công ty cổ phần thương mại dịch vụ Trà Cà Phê VN</p>
+                        <p>
+                            Mã số DN: 0312867172 do sở kế hoạch và đầu tư tp. HCM cấp ngày 23/07/2014. Người đại diện:
+                            NGÔ NGUYÊN KHA
+                        </p>
+                        <p>
+                            Địa chỉ: 86-88 Cao Thắng, phường 04, quận 3, tp Hồ Chí Minh Điện thoại: (028) 7107 8079
+                            Email: hi@thecoffeehouse.vn
+                        </p>
+                        <p>© 2014-2022 Công ty cổ phần thương mại dịch vụ Trà Cà Phê VN mọi quyền bảo lưu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Clients/plugins/bootstrap/js/bootstrap.min.js"></script>
+    @*<script src="~/Content/Clients/plugins/jquery/jquery.min.js"></script>*@
+    <script src="~/Content/Clients/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="~/Scripts/Shopingjs.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

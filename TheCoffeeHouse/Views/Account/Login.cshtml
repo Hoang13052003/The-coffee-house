@@ -1,0 +1,48 @@
+﻿@using TheCoffeeHouse.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<main aria-labelledby="title">
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success" style="text-align: center;">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+    <div id="Form-DN">
+        <div class="wrapper-login">
+            <form action="/Account/Login" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <h1 class="h1">Đăng nhập</h1>
+                <div class="input-box">
+                    <input class="input" name="UserName" type="text" placeholder="Tên Đăng nhập" required>
+                    <i class='bx bxs-user i'></i>
+                </div>
+                <div class="input-box">
+                    <input class="input"  id="password" name="Password" type="password" placeholder="Mật khẩu" required>
+                    <i class='bx bxs-lock-alt i'></i>
+                </div>
+                <div class="remember-forgot">
+                    <label class="label"><input class="input" id="togglePassword" name="RememberMe" type="checkbox">Hiện nhật khẩu</label>
+                    <a class="a" href="@Url.Action("ForgotPassword", "Account")">Lấy lại mật khẩu</a>
+                </div>
+                <button id="button"  type="submit" class="btn">Đăng nhập</button>
+                <div class="register-link">
+                    <p class="p">Bạn chưa có tài khoản? <a class="a" href="">@Html.ActionLink("Đăng ký tài khoản", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link a" })</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    document.getElementById("togglePassword").addEventListener("change", function () {
+        let passwordInput = document.getElementById("password");
+        passwordInput.type = this.checked ? "text" : "password";
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

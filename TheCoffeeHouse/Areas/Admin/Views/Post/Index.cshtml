@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Post>
+
+@{
+    ViewBag.Title = "Quản lý Post";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Post" class="nav-link">Post</a>
+        </li>
+    </ul>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Post</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Trang chủ</li>
+                    <li class="breadcrumb-item active">Post</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách Post</h3>
+
+            <div class="card-tools">
+                <a href="/Admin/Post/Add" class="btn btn-primary">ADD</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Post</th>
+                        <th>SeoTitle</th>
+                        <th>Ảnh</th>
+                        <th>Description</th>
+                        <th>CateID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.PostID" class="">
+                                <td class="align-middle">@i</td>
+                                <td class="align-middle">@item.Name</td>
+                                <td class="align-middle">@item.SeoTitle</td>
+                                <td class="align-middle"><img src="~/Content/Clients/assets/img-post/@item.Image" alt="#" style="width:50px; height:50px" /></td>
+                                <td class="align-middle">@item.Description</td>
+                                <td class="align-middle">@item.CateID</td>
+                                <td class="align-middle">
+                                    <a href="/Admin/Post/Edit/@item.PostID" class="btn btn-sm btn-primary" style="width:75px;">Edit</a>
+                                    <a data-id="@item.PostID" class="btn btn-danger btn-sm btnDelete" style="width:75px;">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="align-middle">
+                                Không có bản ghi nào!
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf == true) {
+                    $.ajax({
+                        url: '/Admin/Post/Delete',
+                        type: 'Post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Product>
+<!-- Menu Home-->
+<div id="menu_home">
+    <div class="container-fluid">
+        <div class="row" style="margin: 0px 170px">
+            <div class="col-lg-6 col-md-12 col-12" style="padding-right: 40px; padding-top: 20px;">
+                <a href="@Url.Action("Index","Menu")"><img src="~/Content/Clients/assets/img/sale/@ViewBag.sale" loading="lazy" alt=""></a>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-6" style="padding-right: 40px; padding-top: 20px;">
+                    <a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })"><img src="~/Content/Clients/assets/img-Product/@item.Image" loading="lazy" alt=""></a>
+                    <h4>
+                        <a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })">@item.Name</a>
+                    </h4>
+                    <p>@item.Price.ToString("N0") vnđ</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

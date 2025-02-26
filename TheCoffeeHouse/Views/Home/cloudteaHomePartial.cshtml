@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Sale>
+<!-- Cloud tea-->
+<div id="cloud_tea">
+    <div class="container-fluid">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                if (item.Image == "cloudtea.jpg")
+                {
+                    <div class="row"  style="margin: 0px 150px">
+                        <div class="col-lg-6 col-md-12 col-12">
+                        </div>
+                        
+                        @foreach (var items in Model)
+                        {
+                            if (items.Image == "tagline.jpg")
+                            { 
+                                <div class="col-lg-6 col-md-12 col-12">
+                                    <img src="~/Content/Clients/assets/img/cloudtea/@items.Image" alt="">
+                                    <p>
+                                        @items.Description
+                                    </p>
+                                    <a href="#">
+                                        <div class="button" style="color:white;">
+                                            Thử ngay
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,36 @@
+#content {
+    width: 80%;
+    padding-top:20px;
+}
+#content h3 {
+    padding-left: 12px;
+    margin-bottom:20px;
+}
+
+
+
+#content img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 1px #a1a1a1;
+}
+
+#content h4 {
+    text-align: left;
+    padding-top: 12px;
+    font-size: 16px;
+}
+
+#content a {
+    color: black;
+}
+
+#content h4:hover a {
+    color: #E57905;
+}
+
+#content p {
+    text-align: left;
+    font-size: 14px;
+    color: #00000099;
+}

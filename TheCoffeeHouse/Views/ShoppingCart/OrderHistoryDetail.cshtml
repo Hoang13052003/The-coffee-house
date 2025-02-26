@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "OrderHistoryDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.order != null)
+{
+    <!-- SHOP-->
+    <div id="shop" style="padding: 50px 0;">
+        <div class="container" style="width: 90%;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h2>Chi tiết đơn hàng</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-md-12 col-12 test" style="padding: 0 35px;">
+                    <div class="row check">
+                        <div class="col-4">
+                            <h4>Giao hàng</h4>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="icon">
+                                        <i class="far fa-shipping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="input">
+                                        <input type="text" id="address" name="Address" value="@ViewBag.order.Address" placeholder="Nhập địa chỉ Giao hàng..." readonly>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="right">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <h5>Nhận hàng trong ngày từ 15-30 phút</h5>
+                                        <p>Vào lúc: Càng sớm càng tốt</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="right">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <h5>Thông tin người nhận:</h5>
+                            <div class="input">
+                                <input type="text" name="CustomerName" value="@ViewBag.order.CustomerName" placeholder="Tên người nhận" readonly>
+                            </div>
+                            <div class="input">
+                                <input type="text" name="Phone" value="@ViewBag.order.Phone" placeholder="Số điện thoại" readonly>
+                            </div>
+                            <div class="input">
+                                <input type="email" name="Email" value="@ViewBag.order.Email" placeholder="Email" readonly>
+                            </div>
+
+                        </div>
+                        <div class="col-12 pay-by">
+                            <div class="row check">
+                                <div class="col-5">
+                                    <h4>Phương thức thanh toán:</h4>
+                                </div>
+                                <ul style="overflow-y: scroll; height: 300px; list-style: none;">
+                                    <li>
+                                        <input type="radio" checked name="pay-by" value="1" id="pay-by" readonly>
+                                        <img src="~/Content/Clients/assets/img-giohang/1000_photo_2021-04-06_11-17-08.jpg" />
+                                        <span>Tiền mặt</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="2" id="pay-by" readonly>
+                                        <img src="~/Content/Clients/assets/img-giohang/386_ic_momo@3x.png" />
+                                        <span>MoMo</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="3" id="pay-by" readonly>
+                                        <img src="~/Content/Clients/assets/img-giohang/388_ic_zalo@3x.png" />
+                                        <span>ZaloPay - Giảm 10K đơn 60K</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="4" id="pay-by" readonly>
+                                        <img src="~/Content/Clients/assets/img-giohang/1120_1119_ShopeePay-Horizontal2_O.png" />
+                                        <span>ShopeePay</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="5" id="pay-by" readonly>
+                                        <img src="~/Content/Clients/assets/img-giohang/385_ic_atm@3x.png" />
+                                        <span>Thẻ ngân hàng</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="question">
+                                <i class="far fa-check-square"></i>
+                                <span>
+                                    Đồng ý với các <a href="">điều khoản và điều kiện</a> mua hàng của The
+                                    Coffee House
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-6 col-md-12 col-12 test"
+                     style="border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; overflow: hidden;">
+                    <div class="row check">
+                        <div class="col-5">
+                            <h4>Các món đã chọn</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="overflow-y: scroll; height: 430px;">
+                            @if (ViewBag.listOrder != null)
+                            {
+                                foreach (var item in ViewBag.listOrder)
+                                {
+                                    <div class="col-12" id="product_@item.ProductID productCart">
+                                        <div class="row info-buy">
+                                            <div class="col-8">
+                                                <a href="#"> <i class="fas fa-pen"></i></a>
+                                                <a href="#" class="btnDetail" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="@item.ProductID">
+                                                    <div class="info">
+                                                        <h6>@item.Quantity x @item.ProductName</h6>
+                                                        <p style="color: gray">@item.Description</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="money">
+                                                    @{ 
+                                                        var total = item.Quantity * item.Price;
+                                                    }
+                                                    <p>@string.Format("{0:N0} đ", total)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-12">
+                                    <p>Không có sản phẩm trong giỏ hàng!</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row check">
+                        <div class="col-4">
+                            <h4>Tổng cộng</h4>
+                        </div>
+                    </div>
+                    <div class="row pay-money">
+                        <div class="col-12">
+                            <div class="row info-buy">
+                                <div class="col-8">
+                                    <div class="pay white">
+                                        <p>Thành tiền</p>
+                                        <p>@string.Format("{0:N0} đ", @ViewBag.order.TotalMoney)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+}
+
+
+
+<!-- /.modal -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDetail', function () {
+                var id = $(this).data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+
+            $('body').on('click', '.btnClose', function () {
+                $('#modal-default').modal('hide');
+            });
+
+
+
+        });
+
+    </script>
+}
+

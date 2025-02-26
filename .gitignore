@@ -1,0 +1,84 @@
+# Các thư mục hệ thống
+bin/
+obj/
+.vs/
+.vscode/
+packages/
+node_modules/
+
+# Các file cấu hình môi trường
+*.user
+*.suo
+*.cache
+*.log
+*.csproj.user
+*.pidb
+*.sdf
+*.dbmdl
+*.bak
+
+# Các file tạm thời
+*.tmp
+*.ide
+*.swp
+*.DS_Store
+*.~*
+
+# Các file build tự động
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.idb
+*.lib
+*.exp
+*.plg
+*.log
+*.o
+*.obj
+*.cache
+*.tlog
+*.lastbuildstate
+
+# Các file của Visual Studio
+*.vspscc
+*.vssscc
+*.testsettings
+*.ncrunchsolution
+*.ncrunchproject
+*.coverage
+TestResults/
+Thumbs.db
+
+# Thư mục publish (khi publish web)
+Publish/
+wwwroot/
+
+# Cấu hình môi trường (chứa thông tin nhạy cảm)
+appsettings.json
+appsettings.Development.json
+secrets.json
+
+# Các file database local
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# Các file khóa SSL tự động tạo
+*.pfx
+*.cer
+
+# Thư mục migrations (Entity Framework)
+Migrations/
+
+# Các file của Rider/JetBrains
+.idea/
+*.iml
+
+# Các file nén, backup
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bak

@@ -1,0 +1,155 @@
+﻿@model TheCoffeeHouse.Models.EtityFarmwork.Product
+@using TheCoffeeHouse.Models.EtityFarmwork
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .quantity {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 10px 10px 10px 0px;
+    }
+
+    .quantity_selector {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        justify-content: center;
+    }
+
+    .minus,
+    .plus {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #cfcccc;
+        border-radius: 50%;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+    }
+
+        .minus:hover,
+        .plus:hover {
+            background-color: #E57905;
+        }
+
+    #quantity_value {
+        margin: 0 10px;
+    }
+
+    .red_button {
+        background-color: #e74c3c;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .red_button a {
+        text-decoration: none;
+        color: #fff;
+    }
+</style>
+<div id="main-info">
+    <div class="header-main">
+        <div class="container">
+            <div class="row" style="padding-top: 25px;">
+                <div class="col-12">
+                    <div class="list">
+                        <ul>
+                            <li><a>Menu </a></li>
+                            <li>/</li>
+                            <li><a>@ViewBag.category </a></li>
+                            <li>/</li>
+                            <li><a> @Html.DisplayFor(model => model.Name)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="big">
+                        <img src="~/Content/Clients/assets/img-Product/@Html.DisplayFor(model => model.Image)" alt="">
+                    </div>
+                    <div class="mini">
+                        <img src="~/Content/Clients/assets/img-Product/@Html.DisplayFor(model => model.Image)" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <h2>@Html.DisplayFor(model => model.Name)</h2>
+                    <h2 class="money">@string.Format("{0:N0} đ", Model.Price)</h2>
+                    <p class="title">Chọn size (bắt buộc)</p>
+                    <div class="option-size">
+                        <div class="size-btn btn" data-price="0"><i class="fa-solid fa-mug-hot"></i> Nhỏ + 0 đ</div>
+                        <div class="size-btn btn" data-price="4000"><i style="font-size:18px;" class="fa-solid fa-mug-hot"></i>Vừa + 4.000 đ</div>
+                        <div class="size-btn btn" data-price="10000"><i style="font-size:23px;" class="fa-solid fa-mug-hot"></i>Lớn + 10.000 đ</div>
+                    </div>
+
+                    <p class="title">Chọn Topping</p>
+                    <div class="option-topping">
+                        <div class="topping-btn btn" data-price="10000">Kem Phô Mai Macchiato + 10.000 đ</div>
+                        <div class="topping-btn btn" data-price="10000">Shot Espresso + 10.000 đ</div>
+                        <div class="topping-btn btn" data-price="10000">Trân châu trắng + 10.000 đ</div>
+                        <div class="topping-btn btn" data-price="10000">Sốt Caramel + 10.000 đ</div>
+                        <div class="topping-btn btn" data-price="10000">Thạch Cà Phê + 10.000 đ</div>
+                    </div>
+                    <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                        <span>Số lượng:</span>
+                        <div class="quantity_selector">
+                            <span class="minus" onclick="decrementQuantity()"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <span id="quantity_value">1</span>
+                            <span class="plus" onclick="incrementQuantity()"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+
+                    <button class="buy btnAddToCart" type="submit" data-id="@Model.ProductID">
+                        <i class="fas fa-cart-plus"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="info">
+                        <h3>Mô tả sản phẩm</h3>
+                        <p>@Html.DisplayFor(model => model.Description)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row info-sanpham">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h3>Sản phẩm liên quan</h3>
+                </div>
+                @foreach (Product item in ViewBag.RelatedProducts)
+                {
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })"><img src="~/Content/Clients/assets/img-Product/@item.Image" alt=""></a>
+                        <h4><a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })">@item.Name</a></h4>
+                        <p>@item.Price.ToString("N0") vnd</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function incrementQuantity() {
+        var quantityElement = document.getElementById('quantity_value');
+        var currentQuantity = parseInt(quantityElement.innerText, 10);
+        quantityElement.innerText = currentQuantity + 1;
+    }
+
+    function decrementQuantity() {
+        var quantityElement = document.getElementById('quantity_value');
+        var currentQuantity = parseInt(quantityElement.innerText, 10);
+        if (currentQuantity > 1) {
+            quantityElement.innerText = currentQuantity - 1;
+        }
+    }
+</script>

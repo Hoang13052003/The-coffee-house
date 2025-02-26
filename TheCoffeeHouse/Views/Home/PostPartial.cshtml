@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Post>
+@using TheCoffeeHouse.Models.EtityFarmwork
+
+<!-- Blog Home-->
+<div id="blog_home" style="margin-bottom:0;">
+    <div class="container">
+        <div class="row" style="padding-top: 40px; padding-bottom: 30px;">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h2 class="title">
+                    <img src="~/Content/Clients/assets/img-post/logo-chuyen-nha.jpg" alt="">
+                    Chuyện Nhà
+                </h2>
+            </div>
+        </div>
+        @{
+            foreach (PostCategory itemcate in ViewBag.Category)
+            {
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <h3>
+                            <a href="">@itemcate.Name</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row list_blog">
+                    @foreach (var item in Model)
+                    {
+                        if (item.CateID == itemcate.CateID)
+                        {
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <a href="@Url.Action("PostDetail","PostHome", new { id = item.PostID})">
+                                    <img src="~/Content/Clients/assets/img-post/@item.Image" alt="">
+                                </a>
+                                <div class="info">
+                                    <div>@item.Created_Date</div>
+                                    <h4>
+                                        <a href=""
+                                           title="SIGNATURE - BIỂU TƯỢNG VĂN HOÁ CÀ PHÊ CỦA THE COFFEE HOUSE ĐÃ QUAY TRỞ LẠI">
+                                            @item.Name
+                                        </a>
+                                    </h4>
+                                    @{
+                                        var seoTitle = item.SeoTitle;
+                                        if (!string.IsNullOrEmpty(seoTitle) && seoTitle.Length > 200)
+                                        {
+                                            seoTitle = seoTitle.Substring(0, 200) + ".......";
+                                        }
+                                    }
+                                    <p>@seoTitle</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+            }
+        }
+    </div>
+</div>
+
+

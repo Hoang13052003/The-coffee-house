@@ -1,0 +1,195 @@
+﻿ <!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/Content/Clients/dist/img/Admin.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">Lưu Văn Hoàng</a>
+        </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    <!--<div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="nav-icon fas fa-list-alt"></i>
+                    <p>
+                        Quản lý Danh mục
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/ProductCategory" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Product</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/PostCategory" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Post</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Product" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Quản lý sản phẩm
+                        @*<span class="right badge badge-danger">New</span>*@
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Role" class="nav-link">
+                    <i class="nav-icon fas fa-user-plus"></i>
+                    <p>
+                        Role
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Quản lý bài viết
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Post" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Post</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/PostDetail" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Post Detail</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quảng cáo
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/AdvertisementSlider" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Slider</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Sale" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sale</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Order" class="nav-link">
+                    <i class="nav-icon far fa-cart-plus"></i>
+                    <p>
+                        Quản lý Đơn hàng
+                    </p>
+                </a>
+            </li>
+            @*<li class="nav-item">
+                <a class="nav-link">
+                    <i class="nav-icon far fa-cart-plus"></i>
+                    <p>
+                        Quản lý Đơn hàng
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Order" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/OrderDetail" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Order Detail</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>*@
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-chart-line"></i>
+                    <p>
+                        Thông kê doanh thu
+                    </p>
+                </a>
+            </li>
+            @*<li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-toolbox"></i>
+                    <p>
+                        Cài đặt hệ thống
+                    </p>
+                </a>
+            </li>*@
+            <li class="nav-item">
+                <a href="/Admin/Account" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Tài khoản
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
+                    <i class="nav-icon fas fa-sign-out"></i>
+                    <p>
+                        Đăng xuất
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+
+@{
+    if (Request.IsAuthenticated)
+    {
+        <div style="display: none;">
+            @using (Html.BeginForm("logOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+            {
+                @Html.AntiForgeryToken();
+            }
+        </div>
+    }
+}

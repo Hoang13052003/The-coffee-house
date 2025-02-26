@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" Account="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Account" class="nav-link">Account</a>
+        </li>
+    </ul>
+}
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sánh tài khoản</h3>
+
+            <div class="card-tools">
+                <a href="/Admin/Account/Create" class="btn btn-success">Thêm mới</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tài khoản</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.UserName">
+                                <td>@i</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Fullname</td>
+                                <td>@item.Email</td>
+                                <td></td>
+                                <td>
+                                    <a href="/Admin/Account/Edit/@item.UserName" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="#" data-id="@item.UserName" class="btn btn-sm btn-danger btnDelete">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                Không có bản ghi nào!
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+
+

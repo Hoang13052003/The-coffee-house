@@ -1,0 +1,113 @@
+/*mobile */
+@media (max-width: 739px) {
+
+    /* index */
+    #container .list-menu {
+        padding: 15px;
+    }
+
+    #container .header-menu-mini {
+        margin-top: 18px;
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    #container .list-menu li {
+        padding: 15px;
+        border-bottom: 1px solid black;
+    }
+
+    #container #bar:checked~.header-menu-mini {
+        min-height: 700px;
+    }
+
+    /* menu.html */
+
+}
+
+/* tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    #container .list-menu {
+        padding: 15px;
+    }
+
+    #container .header-menu-mini {
+        margin-top: 17px;
+        max-height: 0;
+        overflow: hidden;
+        width: 300px;
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    #container .list-menu li {
+        padding: 15px;
+        border-bottom: 1px solid black;
+    }
+
+    #container #bar:checked~.header-menu-mini {
+        min-height: 700px;
+    }
+
+    /* main.html */
+
+}
+
+@media(min-width: 992px) {
+    #nav_bar {
+        display: block;
+    }
+}
+
+/* Mobile tablet */
+@media (max-width: 992px) {
+    #container .menu {
+        display: none;
+    }
+
+    #nav_bar {
+        display: none;
+    }
+
+    #container .list-menu {
+        display: block;
+
+    }
+
+    /* main.html */
+    #main .sidebar {
+        display: none;
+    }
+
+    #main .content {
+        width: 100% !important;
+    }
+
+    /* giohang.html */
+    #shop .pay-money {
+        position: fixed;
+        left: 12px;
+        bottom: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+        z-index: 999;
+        width: 100%;
+        border-radius: none;
+    }
+}
+
+/* >= PC */
+@media (min-width: 1024px) and (max-width: 1239px) {
+
+    /* giohang.html */
+    .box-shadow {
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, .12);
+        border-radius: 8px;
+    }
+
+    #shop .pay-money {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Product>
+@using TheCoffeeHouse.Models.EtityFarmwork
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main">
+    <div class="sidebar">
+        <ul>
+            @foreach (ProductCategory itemenu in ViewBag.Menu)
+            {
+                <li>
+                    <a href="@Url.Action("ProductByCategory","Menu", new { id = itemenu.CateID })">@itemenu.Name</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="content">
+
+        @{
+            foreach (ProductCategory itemenu in ViewBag.MenuProduct)
+            {
+                <div class="container">
+                    <div class="row">
+                        @*@if (parent - itemenu.Parent == 1)
+                            {
+                                <h2 id="@itemenu.Parent">@itemenu.Name</h2>
+                                parent++;
+                            }
+                            else
+                            {
+                                <h2>@itemenu.Name</h2>
+                            }*@
+                        <h2>@itemenu.Name</h2>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CateID == itemenu.CateID)
+                            {
+                                <div class="col-lg-4 col-md-6 col-6">
+                                    <a href="#"><img src="~/Content/Clients/assets/img-Product/@item.Image" alt=""></a>
+                                    <h4><a href="#">@item.Name</a></h4>
+                                    <p>@item.Price.ToString("N0") vnd</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

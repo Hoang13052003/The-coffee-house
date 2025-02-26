@@ -1,0 +1,115 @@
+﻿@model IEnumerable<TheCoffeeHouse.Models.EtityFarmwork.Slider>
+
+@{
+    ViewBag.Title = "Quản lý Slider";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/AdvertisementSlider" class="nav-link">Slider</a>
+        </li>
+    </ul>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Slider</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Trang chủ</li>
+                    <li class="breadcrumb-item active">Slider</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách Slider</h3>
+
+            <div class="card-tools">
+                <a href="/Admin/AdvertisementSlider/Add" class="btn btn-primary">ADD</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Slider</th>
+                        <th>Ảnh</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.ID" class="">
+                                <td class="align-middle">@i</td>
+                                <td class="align-middle">@item.Name</td>
+                                <td class="align-middle"><img src="@item.Link@item.Image" alt="#" style="width:50px; height:50px" /></td>
+                                <td class="align-middle">@item.Link</td>
+                                <td class="align-middle">
+                                    <a href="/Admin/AdvertisementSlider/Edit/@item.ID" class="btn btn-primary">Edit</a>
+                                    <a href="#" data-id="@item.ID" class="btn btn-danger btnDelete">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="9" class="align-middle">
+                                Không có bản ghi nào!
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf == true) {
+                    $.ajax({
+                        url: '/Admin/AdvertisementSlider/Delete',
+                        type: 'Post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+

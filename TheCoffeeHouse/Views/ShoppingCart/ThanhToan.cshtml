@@ -1,0 +1,44 @@
+﻿@model TheCoffeeHouse.Models.EtityFarmwork.Order
+@using TheCoffeeHouse.Models.EtityFarmwork
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tongTien = decimal.Zero;
+}
+
+
+@section Styles{
+    <style>
+        .success-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .success-box {
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: #28a745;
+        }
+    </style>    
+}
+
+<div class="container success-container">
+    <div class="success-box">
+        <div class="success-icon">
+            ✅
+        </div>
+        <h2 class="mt-3">Đặt Hàng Thành Công!</h2>
+        <p>Cảm ơn bạn đã đặt hàng tại <strong>The Coffee House</strong>. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Quay về trang chủ</a>
+    </div>
+</div>

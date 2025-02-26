@@ -1,0 +1,37 @@
+﻿@model TheCoffeeHouse.Models.EtityFarmwork.Order
+@{
+    ViewBag.Title = "Lịch sử đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<h3 style="margin-top: 50px;" class="text-center">@ViewBag.Title</h3>
+<main class="container">
+    @if (ViewBag.OrderHistory != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Ghi chú</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.OrderHistory)
+                {
+                    <tr>
+                        <th scope="row">@item.OrderID</th>
+                        <td>@item.OrderDate</td>
+                        <td>@item.Note</td>
+                        <td>@string.Format("{0:N0} đ", @item.TotalMoney)</td>
+                        <td><a href="@Url.Action("OrderHistoryDetail", "ShoppingCart", new {id = @item.OrderID})" class="btn btn-sm btn-primary">Xem chi tiết</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</main>

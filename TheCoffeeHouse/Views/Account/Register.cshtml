@@ -1,0 +1,46 @@
+﻿@model TheCoffeeHouse.Models.CreateAccountViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<main aria-labelledby="title">
+    <div id="Form-DN">
+        <section id="container-rg">
+            <header class="header-rg">Đăng ký tài khoản</header>
+            <form action="/Account/Register" method="post" class="form-rg">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="input-box-rg">
+                    <label class="label-rg">Tài khoản</label>
+                    <input class="input-rg" name="UserName" type="text" placeholder="Nhập tên đăng nhập" required />
+                </div>
+                <div class="input-box-rg">
+                    <label class="label-rg">Họ tên</label>
+                    <input class="input-rg" name="FullName" type="text" placeholder="Nhập họ tên" required />
+                </div>
+                <div class="input-box-rg">
+                    <label class="label-rg">Email</label>
+                    <input class="input-rg" name="Email" type="email" placeholder="Nhập địa chỉ" required />
+                </div>
+                <div class="input-box-rg">
+                    <label class="label-rg">Phone</label>
+                    <input class="input-rg" name="Phone" type="text" placeholder="Nhập số điện thoại" required />
+                </div>
+                <div class="input-box-rg">
+                    <label class="label-rg">Mật khẩu</label>
+                    <input class="input-rg" name="Password" type="password" placeholder="Nhập mật khẩu" required />
+                </div>
+                <div class="input-box-rg">
+                    <label class="label-rg">Nhập lại mật khẩu</label>
+                    <input class="input-rg" name="ConfirmPassword" type="password" placeholder="Nhập lại mật khẩu" required />
+                </div>
+                <button id="button-rg" type="submit" class="btn">Đăng ký</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

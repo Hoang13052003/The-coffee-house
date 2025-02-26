@@ -1,0 +1,149 @@
+.white{
+    color: white;
+}
+
+#shop .row {
+    align-items: center;
+    justify-content: space-between;
+}
+#shop .row .check {
+    padding: 12px 0;
+}
+#shop h2 {
+    text-align: center;
+    font-size: 28px;
+}
+
+#shop .file {
+    color: #E57905;
+}
+#shop .icon {
+    font-size: 30px;
+}
+#shop a{
+    color: black;
+}
+
+#shop .check h4 {
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E57905;
+}
+#shop .content {
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 4px;
+    text-align: center;
+}
+
+#shop .content a{
+    font-size: 12px;
+}
+
+#shop h5 {
+    font-size: 13.4px;
+    margin: 0;
+    text-align: left;
+}
+#shop p{
+    font-size: 14px;
+    margin: 0;
+    text-align: left;
+}
+
+#shop .right{
+    font-size: 20px;
+}
+
+#shop .input {
+    margin: 6px 0;
+}
+
+#shop .input input{
+    padding: 5px 20px;
+    width: 100%;
+}
+
+#shop .info-buy {
+    padding: 12px 0;
+}
+
+#shop .info-buy .col-8{
+    display: inherit;
+}
+#shop .info-buy i {
+    line-height: 60px;
+    padding-right: 20px;
+    color: #E57905;
+    font-size: 12px;
+}
+#shop .info h6 {
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+#shop .money p {
+    font-size: 16px;
+    text-align: right;
+}
+#shop .pay-money {
+    background-color: #E57905;
+    
+}
+.border-btn {
+    border-bottom: 1px solid #c4c4c4;
+}
+
+#shop .push {
+    text-align: center;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+#shop .push a{
+    color: #E57905;
+}
+
+#shop .push a:hover {
+    color: black;
+}
+
+
+
+#shop .pay-by li {
+    padding: 12px 0;
+    border-bottom: 1px solid #c4c4c4;
+    margin-left: 20px;
+    display: flex;
+    gap: 10px;
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+#shop .pay-by input {
+    width: 20px;
+    height: 20px;
+    color: #c4c4c4;
+}
+#shop .pay-by img{
+    width: 30px;
+}
+
+#shop .question i{
+    color: #E57905;
+}
+
+
+#shop .delete,
+#shop .question a{
+    color: #E57905;
+    text-align: center;
+}
+#shop .delete {
+    cursor: pointer;
+}
+#footer {
+    padding-bottom: 40px;
+}

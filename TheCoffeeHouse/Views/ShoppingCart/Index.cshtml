@@ -1,0 +1,307 @@
+﻿
+@model TheCoffeeHouse.Models.EtityFarmwork.Order
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tongTien = decimal.Zero;
+
+    
+}
+
+
+
+<!-- SHOP-->
+<div id="shop" style="padding: 50px 0;">
+    <div class="container" style="width: 90%;">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h2><i class="fas fa-file file"></i> Xác nhận đơn hàng</h2>
+            </div>
+        </div>
+        @using (Html.BeginForm("ThanhToan", "ShoppingCart", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-xl-6 col-md-12 col-12 test" style="padding: 0 35px;">
+                    <div class="row check">
+                        <div class="col-4">
+                            <h4>Giao hàng</h4>
+                        </div>
+                        <div class="col-5">
+                            <div class="content">
+                                <a href="">Đổi phương thức</a>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="icon">
+                                        <i class="far fa-shipping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="input">
+                                        <input type="text" id="address" name="Address" placeholder="Nhập địa chỉ Giao hàng..." required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="right">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <h5>Nhận hàng trong ngày từ 15-30 phút</h5>
+                                        <p>Vào lúc: Càng sớm càng tốt</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="right">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <h5>Thông tin người nhận:</h5>
+                            @{ var userInfo = ViewBag.UserInfo as dynamic; }
+                            @if (userInfo != null)
+                            {
+                                <div class="input">
+                                    <input type="text" name="CustomerName" value="@userInfo.FullName" placeholder="Tên người nhận" readonly>
+                                </div>
+                                <div class="input">
+                                    <input type="text" name="Phone" value="@userInfo.Phone" placeholder="Số điện thoại" readonly>
+                                </div>
+                                <div class="input">
+                                    <input type="email" name="Email" value="@userInfo.Email" placeholder="Email" readonly>
+                                </div>
+                            }
+
+
+                            <div class="input">
+                                <input type="text" name="Note" placeholder="Thêm hướng dẫn giao hàng">
+                            </div>
+                        </div>
+                        <div class="col-12 pay-by">
+                            <div class="row check">
+                                <div class="col-5">
+                                    <h4>Phương thức thanh toán:</h4>
+                                </div>
+                                <ul style="overflow-y: scroll; height: 300px; list-style: none;">
+                                    <li>
+                                        <input type="radio" name="pay-by" value="1" id="pay-by">
+                                        <img src="~/Content/Clients/assets/img-giohang/1000_photo_2021-04-06_11-17-08.jpg" />
+                                        <span>Tiền mặt</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="2" id="pay-by">
+                                        <img src="~/Content/Clients/assets/img-giohang/386_ic_momo@3x.png" />
+                                        <span>MoMo</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="3" id="pay-by">
+                                        <img src="~/Content/Clients/assets/img-giohang/388_ic_zalo@3x.png" />
+                                        <span>ZaloPay - Giảm 10K đơn 60K</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="4" id="pay-by">
+                                        <img src="~/Content/Clients/assets/img-giohang/1120_1119_ShopeePay-Horizontal2_O.png" />
+                                        <span>ShopeePay</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="pay-by" value="5" id="pay-by">
+                                        <img src="~/Content/Clients/assets/img-giohang/385_ic_atm@3x.png" />
+                                        <span>Thẻ ngân hàng</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="question">
+                                <i class="far fa-check-square"></i>
+                                <span>
+                                    Đồng ý với các <a href="">điều khoản và điều kiện</a> mua hàng của The
+                                    Coffee House
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-6 col-md-12 col-12 test"
+                     style="border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; overflow: hidden;">
+                    <div class="row check">
+                        <div class="col-5">
+                            <h4>Các món đã chọn</h4>
+                        </div>
+                        <div class="col-4">
+                            <a href="@Url.Action("Index", "Menu")">
+                                <div class="content">
+                                    Thêm món
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="overflow-y: scroll; height: 430px;">
+                            @if (ViewBag.CartItem != null)
+                            {
+                                foreach (var item in ViewBag.CartItem)
+                                {
+                                    tongTien += item.Total;
+                                    <div class="col-12" id="product_@item.ProductID productCart">
+                                        <div class="row info-buy">
+                                            <div class="col-8">
+                                                <a href="#"> <i class="fas fa-pen"></i></a>
+                                                <a href="#" class="btnDetail" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="@item.ProductID">
+                                                    <div class="info">
+                                                        <h6>@item.Quantity x @item.Name</h6>
+                                                        <p style="color: gray">@item.Description</p>
+                                                    </div>
+                                                </a>
+                                                
+                                                @* Hiện thông tin chi tiết sản phẩm được chọn trong giỏ hàng*@
+                                                <div class="modal fade" id="modal-default">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" style="text-align: center;">@item.Name</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-12" >
+                                                                        <img style="border-radius: 20px; box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;" src="~/Content/Clients/assets/img-Product/@item.Image" class="img-fluid" alt="">
+                                                                    </div>
+                                                                    <div class="col-12" style="margin-top: 20px;">
+                                                                        <h5>Ghi chú:</h5>
+                                                                        <p style="color: gray">@item.Description</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default btnClose" data-dismiss="modal">Đóng</button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="money">
+                                                    <p>@string.Format("{0:N0} đ", @item.Total)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-1">
+                                                <a href="#" data-id="@item.ProductID" class="btnDelete"><i class="fa-regular fa-trash-can" style="font-size: 25px;"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-12">
+                                    <p>Không có sản phẩm trong giỏ hàng!</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row check">
+                        <div class="col-4">
+                            <h4>Tổng cộng</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row info-buy border-btn">
+                                <div class="col-8">
+                                    <div class="pay">
+                                        <p>Thành tiền</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="money">
+                                        <p>@string.Format("{0:N0} đ", tongTien)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row info-buy border-btn">
+                                <div class="col-8">
+                                    <div class="pay">
+                                        <p>Phí giao hàng</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="money">
+                                        <p>0 đ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pay-money">
+                        <div class="col-12">
+                            <div class="row info-buy">
+                                <div class="col-8">
+                                    <div class="pay white">
+                                        <p>Thành tiền</p>
+                                        <p>@string.Format("{0:N0} đ", tongTien)</p>
+                                        <input type="text" name="TotalMoney" value="@tongTien" style="display: none;" />
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <input type="submit" style="width: 100%; border:none; height:50px; border-radius: 30px;" class="btn-primary btnDatHang" placeholder="Đặt hàng" value="Đặt hàng" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 col-12" style="margin: 30px 0;">
+                    <div class="row delete deleteAll">
+                        <div class="col-12">
+                            <i class="fas fa-trash"></i>
+                            <span>Xóa đơn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
+
+<!-- /.modal -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDetail', function () {
+                var id = $(this).data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+
+            $('body').on('click', '.btnClose', function () {
+                $('#modal-default').modal('hide');
+            });
+
+
+
+        });
+
+    </script>
+}

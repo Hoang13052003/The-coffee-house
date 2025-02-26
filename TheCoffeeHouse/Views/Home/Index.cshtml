@@ -1,0 +1,14 @@
+﻿@model TheCoffeeHouse.Models.ApplicationDbContext
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Action("SliderPartial", "Home")
+
+@Html.Action("MenuHomePartial", "Home")
+
+@Html.Action("cloudteaHomePartial", "Home")
+
+@Html.Action("PostPartial", "Home")
