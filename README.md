@@ -23,7 +23,7 @@ Dự án này phát triển một website thương mại điện tử cho The Co
 ![Trang chủ](Images_Gioi_Thieu_Project/Home.jpg)
 
 ### Trang sản phẩm
-![Trang sản phẩm](Images_Gioi_Thieu_Project/Product.jpg)
+![Trang sản phẩm](Images_Gioi_Thieu_Project/product.jpg)
 
 ### Trang giỏ hàng
 ![Trang giỏ hàng](Images_Gioi_Thieu_Project/ShoppingCart.jpg)
