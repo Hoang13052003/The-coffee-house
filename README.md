@@ -20,13 +20,16 @@ Dự án này phát triển một website thương mại điện tử cho The Co
 ## Giao diện
 
 ### Trang chủ
-![Trang chủ](images/homepage.png)
+![Trang chủ](Images_Gioi_Thieu_Project/Home.jpg)
 
 ### Trang sản phẩm
-![Trang sản phẩm](images/products.png)
+![Trang sản phẩm](Images_Gioi_Thieu_Project/product.jpg)
+
+### Trang giỏ hàng
+![Trang giỏ hàng](Images_Gioi_Thieu_Project/ShoppingCart.jpg)
 
 ### Trang quản lý Admin
-![Trang Admin](images/admin_dashboard.png)
+![Trang Admin](Images_Gioi_Thieu_Project/Admin_SP.jpg)
 
 ## Hướng dẫn cài đặt
 1. Clone repository:
@@ -44,6 +47,3 @@ Dự án này phát triển một website thương mại điện tử cho The Co
 
 ## Đóng góp
 Mọi đóng góp để cải thiện dự án đều được hoan nghênh! Hãy tạo pull request hoặc mở issue để thảo luận.
-
-## Giấy phép
-Dự án này được phát hành dưới giấy phép MIT.
