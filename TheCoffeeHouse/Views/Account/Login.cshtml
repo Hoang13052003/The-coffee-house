@@ -22,14 +22,14 @@
                     <i class='bx bxs-user i'></i>
                 </div>
                 <div class="input-box">
-                    <input class="input"  id="password" name="Password" type="password" placeholder="Mật khẩu" required>
+                    <input class="input" id="password" name="Password" type="password" placeholder="Mật khẩu" required>
                     <i class='bx bxs-lock-alt i'></i>
                 </div>
                 <div class="remember-forgot">
                     <label class="label"><input class="input" id="togglePassword" name="RememberMe" type="checkbox">Hiện nhật khẩu</label>
                     <a class="a" href="@Url.Action("ForgotPassword", "Account")">Lấy lại mật khẩu</a>
                 </div>
-                <button id="button"  type="submit" class="btn">Đăng nhập</button>
+                <button id="button" type="submit" class="btn">Đăng nhập</button>
                 <div class="register-link">
                     <p class="p">Bạn chưa có tài khoản? <a class="a" href="">@Html.ActionLink("Đăng ký tài khoản", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link a" })</a></p>
                 </div>

@@ -13,40 +13,56 @@ namespace TheCoffeeHouse
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            
+            //HOME
+
+            // Route tùy chỉnh cho Coffee
             routes.MapRoute(
-                name: "GioHang",
-                url: "GioHang",
-                defaults: new { controller = "ShoppingCart", action = "Index" },
-                namespaces: new[] { "TheCoffeeHouse.Controllers" }
+                name: "Coffee",
+                url: "coffee",
+                defaults: new { controller = "AtHome", action = "Coffee" }
             );
+
+            // Route tùy chỉnh cho Tea
             routes.MapRoute(
-                name: "LichSu",
-                url: "LichSuDonHang",
+                name: "Tea",
+                url: "tea",
+                defaults: new { controller = "AtHome", action = "Tea" }
+            );
+           
+            routes.MapRoute(
+                name: "Lịch sử đơn hàng",
+                url: "lich-su-don-hang",
                 defaults: new { controller = "ShoppingCart", action = "OrderHistory" },
                 namespaces: new[] { "TheCoffeeHouse.Controllers" }
             );
 
             routes.MapRoute(
-               name: "ListProduct",
-               url: "San-pham",
+               name: "Danh sách sản phẩm",
+               url: "san-pham",
                defaults: new { controller = "Menu", action = "Index" },
                namespaces: new[] { "TheCoffeeHouse.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "Danh sách sản phẩm theo danh mục",
+               url: "san-pham/danh-muc/{id}",
+               defaults: new { controller = "Menu", action = "ProductByCategory", id = UrlParameter.Optional },
+               namespaces: new[] { "TheCoffeeHouse.Controllers" }
+            );
+
+            // Route cho chi tiết sản phẩm
+            routes.MapRoute(
+                name: "Chi tiết sản phẩm",
+                url: "chi-tiet-san-pham/{cateid}/{id}",
+                defaults: new { controller = "Menu", action = "ProductDetail", cateid = UrlParameter.Optional, id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+               name: "Giỏ hàng",
+               url: "gio-Hang",
+               defaults: new { controller = "ShoppingCart", action = "Index" },
+               namespaces: new[] { "TheCoffeeHouse.Controllers" }
            );
-
-            //routes.MapRoute(
-            //    name: "ProductByCategory",
-            //    url: "San-pham/{namecategory}",
-            //    defaults: new { controller = "Menu", action = "ProductByCategory", namecategory = UrlParameter.Optional },
-            //    namespaces: new[] { "TheCoffeeHouse.Controllers" }
-            //);
-
-            //routes.MapRoute(
-            //    name: "ProductDetail",
-            //    url: "San-pham/{nameproduct}",
-            //    defaults: new { controller = "Menu", action = "ProductDetail", nameproduct = UrlParameter.Optional },
-            //    namespaces: new[] { "TheCoffeeHouse.Controllers" }
-            //);
 
             routes.MapRoute(
                 name: "Default",

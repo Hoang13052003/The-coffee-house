@@ -104,7 +104,7 @@ namespace TheCoffeeHouse.Controllers
                 case SignInStatus.Failure:
 
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
                     return View(model);
             }
         }
@@ -267,22 +267,10 @@ namespace TheCoffeeHouse.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                //return RedirectToAction("ForgotPasswordConfirmation", "Account");
-
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account",
-                    new { userId = user.Id, code = code },
-                    protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                string body = $"Vui lòng đặt lại mật khẩu bằng cách nhấn vào <a href=\"{callbackUrl}\">đây</a>";
-
-               if (TheCoffeeHouse.Common.Common.SendEmailAsync(user.Email, "Đặt lại mật khẩu", body))
-                {
-                    Console.WriteLine("gửi mail thành công!");
-                }
+                TheCoffeeHouse.Common.Common.SendEmailAsync(user.Email, callbackUrl);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
 
@@ -319,26 +307,20 @@ namespace TheCoffeeHouse.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                TempData["SuccessMessage"] = "Không tồn tại Tên đăng nhập. vui lòng đăng ký tài khoản!";
+                return RedirectToAction("Login", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                TempData["SuccessMessage"] = "Mật khẩu đã được cập nhật. vui lòng đăng nhập!";
+                return RedirectToAction("Login", "Account");
             }
             AddErrors(result);
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
             return View();
         }
 

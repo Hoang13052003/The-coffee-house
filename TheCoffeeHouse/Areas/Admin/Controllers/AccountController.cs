@@ -110,7 +110,8 @@ namespace TheCoffeeHouse.Areas.Admin.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            // Chuyển hướng người dùng đến trang gốc sau khi đăng xuất
+            return Redirect("~/");
         }
         private IAuthenticationManager AuthenticationManager
         {

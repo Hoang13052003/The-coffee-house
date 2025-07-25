@@ -26,7 +26,8 @@ namespace TheCoffeeHouse.Controllers
             ViewBag.MenuProduct = menuProduct;
             return View(item);
         }
-
+        
+        [Route("san-pham/danh-muc/{id}")]
         public ActionResult ProductByCategory(int id)
         {
             if (id == 1)
@@ -58,6 +59,7 @@ namespace TheCoffeeHouse.Controllers
                 return View(item);
             }
         }
+        [Route("san-pham/{cateid}/{id}")]
         public ActionResult ProductDetail(int id, int cateid)
         {
             var item = db.products.Find(id);

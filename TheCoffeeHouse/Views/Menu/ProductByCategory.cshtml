@@ -23,23 +23,14 @@
             {
                 <div class="container">
                     <div class="row">
-                        @*@if (parent - itemenu.Parent == 1)
-                            {
-                                <h2 id="@itemenu.Parent">@itemenu.Name</h2>
-                                parent++;
-                            }
-                            else
-                            {
-                                <h2>@itemenu.Name</h2>
-                            }*@
                         <h2>@itemenu.Name</h2>
                         @foreach (var item in Model)
                         {
                             if (item.CateID == itemenu.CateID)
                             {
                                 <div class="col-lg-4 col-md-6 col-6">
-                                    <a href="#"><img src="~/Content/Clients/assets/img-Product/@item.Image" alt=""></a>
-                                    <h4><a href="#">@item.Name</a></h4>
+                                    <a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })"><img src="~/Content/Clients/assets/img-Product/@item.Image" alt=""></a>
+                                    <h4><a href="@Url.Action("ProductDetail","Menu", new { id = item.ProductID, cateid = item.CateID })">@item.Name</a></h4>
                                     <p>@item.Price.ToString("N0") vnd</p>
                                 </div>
                             }

@@ -1,8 +1,10 @@
 ﻿$(document).ready(function () {
     ShowCount();
 
-    let basePrice = parseInt($("#total-price").text().replace(/\D/g, "")); // Giá gốc của sản phẩm
+    let basePrice = parseInt($("#total-price").text().replace(/\D/g, "")) || 0;
+
     let selectedSize = null;
+
     let selectedToppings = [];
     let totalToppingAndSize = 0;
 
@@ -43,29 +45,29 @@
 
     //    updateTotalPrice();
     //});
-    $(".size-btn").click(function () {
-        $(".size-btn").removeClass("selected btn-success").addClass("btn-outline-secondary"); // Reset màu
-        $(this).removeClass("btn-outline-secondary").addClass("selected btn-success"); // Đổi màu khi được chọn
+    $('.size-btn').on('click', function () {
+        $(".size-btn").removeClass("selected btn-warning"); // Reset màu
+        $(this).addClass("selected btn-warning"); // Đổi màu khi được chọn
 
         selectedSize = {
             name: $(this).text().trim(),
-            price: parseInt($(this).data("price"))
+            price: parseInt($(this).data("price")) || 0
         };
 
         updateTotalPrice();
     });
 
-    $(".topping-btn").click(function () {
+    $('.topping-btn').on('click', function () {
         let toppingName = $(this).text().trim();
         let toppingPrice = parseInt($(this).data("price"));
 
         let index = selectedToppings.findIndex(t => t.name === toppingName);
         if (index > -1) {
             selectedToppings.splice(index, 1);
-            $(this).removeClass("selected btn-warning").addClass("btn-outline-secondary"); // Trở về màu ban đầu
+            $(this).removeClass("selected btn-warning"); // Trở về màu ban đầu
         } else {
             selectedToppings.push({ name: toppingName, price: toppingPrice });
-            $(this).removeClass("btn-outline-secondary").addClass("selected btn-warning"); // Đổi màu khi chọn
+            $(this).addClass("selected btn-warning"); // Đổi màu khi chọn
         }
 
         updateTotalPrice();
@@ -137,36 +139,7 @@
             });
         }
     });
-    //$('body').on('click', '.btnDetail', function (e) {
-    //    e.preventDefault();
-    //    var id = $(this).data('id');
-    //    $.ajax({
-    //        url: '/ShoppingCart/_ProductDetailPartial',
-    //        type: 'GET',
-    //        data: { id: id },
-    //        success: function (rs) {
-    //            $('#productDetailModal').html(rs);
-    //            $('#productDetailModal').modal('show');
-    //        },
-    //        error: function (xhr, status, error) {
-    //            console.error('AJAX Error:', status, error);
-    //        }
-    //    });
-    //});
-    //$('body').on('click', '.btnUpdateQuantity', function (e) {
-    //    e.preventDefault();
-    //    var id = $('#quantity').data('id');
-    //    var quantity = $('#quantity').val();
-    //    $.ajax({
-    //        url: '/ShoppingCart/Update',
-    //        type: 'POST',
-    //        data: { id: id, quantity: quantity },
-    //        success: function (rs) {
-    //            $('#productDetailModal').modal('hide');
-    //            alert(rs.msg);
-    //        }
-    //    });
-    //});
+
 });
 
 function ShowCount() {

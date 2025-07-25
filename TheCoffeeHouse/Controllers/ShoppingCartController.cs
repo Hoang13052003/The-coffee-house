@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Dynamic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using TheCoffeeHouse.Models;
 using TheCoffeeHouse.Models.EtityFarmwork;
@@ -13,7 +19,13 @@ namespace TheCoffeeHouse.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _dbContext;
+
+        public ShoppingCartController()
+        {
+            _dbContext = new ApplicationDbContext();
+        }
+
         // GET: ShoppingCart
         public ActionResult Index()
         {
@@ -26,18 +38,15 @@ namespace TheCoffeeHouse.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string userId = User.Identity.GetUserId(); // Lấy ID người dùng đang đăng nhập
-                using (var db = new ApplicationDbContext())
+                var user = _dbContext.Users.Find(userId); // Tìm User theo ID nhanh hơn
+                if (user != null)
                 {
-                    var user = db.Users.Find(userId); // Tìm User theo ID nhanh hơn
-                    if (user != null)
-                    {
-                        dynamic userInfo = new ExpandoObject();
-                        userInfo.FullName = user.Fullname;
-                        userInfo.Email = user.Email;
-                        userInfo.Phone = user.Phone;
+                    dynamic userInfo = new ExpandoObject();
+                    userInfo.FullName = user.Fullname;
+                    userInfo.Email = user.Email;
+                    userInfo.Phone = user.Phone;
 
-                        ViewBag.UserInfo = userInfo;
-                    }
+                    ViewBag.UserInfo = userInfo;
                 }
             }
 
@@ -48,27 +57,24 @@ namespace TheCoffeeHouse.Controllers
         {
 
             string userId = User.Identity.GetUserId(); // Lấy ID người dùng đang đăng nhập
-            using (var db = new ApplicationDbContext())
+            var user = _dbContext.Users.Find(userId); // Tìm User theo ID nhanh hơn
+            if (user != null)
             {
-                var user = db.Users.Find(userId); // Tìm User theo ID nhanh hơn
-                if (user != null)
-                {
-                    var listOrder = db.orders.Where(x => x.Phone == user.Phone).ToList();
+                var listOrder = _dbContext.orders.Where(x => x.Phone == user.Phone).ToList();
 
-                    ViewBag.OrderHistory = listOrder;
-                }
+                ViewBag.OrderHistory = listOrder;
             }
 
             return View();
         }
         public ActionResult OrderHistoryDetail(int Id)
         {
-            var order = db.orders.FirstOrDefault(x=> x.OrderID == Id);
+            var order = _dbContext.orders.FirstOrDefault(x=> x.OrderID == Id);
             if (order != null)
             {
                 ViewBag.order = order;
             }
-            var listOrderDetail = db.orderDetails.Where(x=> x.OrderID == Id).ToList();
+            var listOrderDetail = _dbContext.orderDetails.Where(x=> x.OrderID == Id).ToList();
             
             if(listOrderDetail.Count > 0)
             {
@@ -81,74 +87,108 @@ namespace TheCoffeeHouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThanhToan(Order model)
+        public async Task<ActionResult> ThanhToan(Order model)
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
-                if (ModelState.IsValid)
-                {
-                    ShoppingCart cart = (ShoppingCart)Session["Cart"];
-                    if (cart != null)
-                    {
-                        //cập nhật đơn hàng vào db
-                        model.OrderDate = DateTime.Now;
-                        model.Created_Date = DateTime.Now;
-                        model.StatusID = 1;
-                        model.DeliveredID = 1;
-                        db.orders.Add(model);
-
-                        //cập nhật chi tiết sản phẩm vào db
-                        List<OrderDetail> lstOD = new List<OrderDetail>();
-                        foreach (var item in cart.Items)
-                        {
-                            OrderDetail detail = new OrderDetail();
-                            detail.OrderID = model.OrderID;
-                            detail.ProductID = item.ProductID;
-                            detail.ProductName = item.Name;
-                            detail.Price = item.Price;
-                            detail.Quantity = item.Quantity;
-                            detail.Description = item.Description;
-                            db.orderDetails.Add(detail);
-                            lstOD.Add(detail);
-                        }
-                        db.SaveChanges();
-
-
-                        // gửi mail cho khách hàng
-                        var StrProduct = "";
-                        foreach (var sp in cart.Items)
-                        {
-                            StrProduct += "<tr>";
-                            StrProduct += "<td>" + sp.Name + "</td>";
-                            StrProduct += "<td>" + sp.Quantity + "</td>";
-                            StrProduct += "<td>" + sp.Price + "</td>";
-                            StrProduct += "</tr>";
-                        }
-
-                        string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"));
-                        contentCustomer = contentCustomer.Replace("{{MaDon}}", model.OrderID.ToString());
-                        contentCustomer = contentCustomer.Replace("{{SanPham}}", StrProduct);
-                        contentCustomer = contentCustomer.Replace("{{ThanhTien}}", string.Format("{0:N0} đ", model.TotalMoney));
-                        contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", model.CustomerName);
-                        contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", model.Address);
-                        contentCustomer = contentCustomer.Replace("{{Phone}}", model.Phone);
-                        contentCustomer = contentCustomer.Replace("{{Email}}", model.Email);
-                        contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString());
-                        TheCoffeeHouse.Common.Common.SendMail("The Coffee House", "Đơn hàng #" + model.OrderID.ToString(), contentCustomer.ToString(), model.Email);
-
-                        cart.ClearCart();
-                        return View(model);
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                TempData["SuccessMessage"] = "Vui lòng đăng nhập trước khi đặt hàng! vui lòng đăng nhập!";
+                TempData["SuccessMessage"] = "Vui lòng đăng nhập trước khi đặt hàng!";
                 return RedirectToAction("Login", "Account");
             }
+
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart == null || !cart.Items.Any()) return RedirectToAction("Index");
+
+            // Lấy phương thức thanh toán
+            int paymentMethod = int.TryParse(Request.Form["pay-by"], out int method) ? method : 1;
+
+            // Tạo đơn hàng
+            model.OrderDate = DateTime.Now;
+            model.Created_Date = DateTime.Now;
+            model.StatusID = 1;
+            model.DeliveredID = 1;
+            //model.PaymentMethod = paymentMethod;
+            _dbContext.orders.Add(model);
+
+            // Thêm chi tiết đơn hàng
+            foreach (var item in cart.Items)
+            {
+                _dbContext.orderDetails.Add(new OrderDetail
+                {
+                    OrderID = model.OrderID,
+                    ProductID = item.ProductID,
+                    ProductName = item.Name,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    Description = item.Description
+                });
+            }
+
+            _dbContext.SaveChanges(); // Lưu 1 lần duy nhất
+
+            // Xử lý thanh toán
+            return await HandlePayment(paymentMethod, model.OrderID, cart, model);
         }
 
+        // Xử lý thanh toán dựa vào phương thức thanh toán
+        private async Task<ActionResult> HandlePayment(int paymentMethod, int orderId, ShoppingCart cart, Order model)
+        {
+            ActionResult result;
+            switch (paymentMethod)
+            {
+                case 2:
+                    var momoService = new MomoService();
+                    var payUrl = await momoService.CreatePaymentUrlAsync(orderId, model.TotalMoney); // Sử dụng service
+
+                    if (!string.IsNullOrEmpty(payUrl))
+                    {
+                        result = Redirect(payUrl);
+                    }
+                    else
+                    {
+                        result = Content("Lỗi khi tạo yêu cầu thanh toán qua MoMo.");
+                    }
+                    break;
+                //case 3:
+                //    result = RedirectToAction("Payment", "ZaloPay", new { orderId });
+                //    break;
+                //case 4:
+                //    result = RedirectToAction("Payment", "ShopeePay", new { orderId });
+                //    break;
+                //case 5:
+                //    result = RedirectToAction("Payment", "Bank", new { orderId });
+                //    break;
+                default:
+                    result = View(model); // Thanh toán tiền mặt => Trả về View xác nhận đơn hàng
+                    break;
+            }
+
+            SendOrderEmail(cart, model);
+            cart.ClearCart();
+
+            return result;
+        }
+
+        // Gửi email xác nhận đơn hàng
+        private void SendOrderEmail(ShoppingCart cart, Order model)
+        {
+            string strProduct = string.Join("", cart.Items.Select(sp =>
+                $"<tr><td>{sp.Name}</td><td>{sp.Quantity}</td><td>{sp.Price}</td></tr>"
+            ));
+
+            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"))
+                .Replace("{{MaDon}}", model.OrderID.ToString())
+                .Replace("{{SanPham}}", strProduct)
+                .Replace("{{ThanhTien}}", string.Format("{0:N0} đ", model.TotalMoney))
+                .Replace("{{TenKhachHang}}", model.CustomerName)
+                .Replace("{{DiaChiNhanHang}}", model.Address)
+                .Replace("{{Phone}}", model.Phone)
+                .Replace("{{Email}}", model.Email)
+                .Replace("{{NgayDat}}", DateTime.Now.ToString());
+
+            TheCoffeeHouse.Common.Common.SendMail("The Coffee House", "Đơn hàng #" + model.OrderID, contentCustomer, model.Email);
+        }
 
 
         [HttpGet]
@@ -268,5 +308,14 @@ namespace TheCoffeeHouse.Controllers
         //    }
         //    return Json(code);
         //}
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dbContext.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

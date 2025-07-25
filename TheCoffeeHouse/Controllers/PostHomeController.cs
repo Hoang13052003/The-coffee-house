@@ -11,8 +11,8 @@ namespace TheCoffeeHouse.Controllers
     public class PostHomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       //chưa làm trang post
-
+       
+        //chưa làm trang post
         //public ActionResult Index()
         //{
         //    var item = db.posts.ToList();
